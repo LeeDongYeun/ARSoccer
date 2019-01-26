@@ -41,4 +41,5 @@ public class InstantiateObjectOnTouch : MonoBehaviour {
 			placedObject.transform.parent = anchor.transform;
 		}
 	}
+
 }

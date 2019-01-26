@@ -50,6 +50,7 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// <summary>
         /// The Cloud Anchors Example Controller.
         /// </summary>
+        
         public CloudAnchorsExampleController CloudAnchorsExampleController;
 
         /// <summary>
