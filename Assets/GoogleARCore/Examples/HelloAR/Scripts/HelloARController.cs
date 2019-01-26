@@ -79,6 +79,11 @@ namespace GoogleARCore.Examples.HelloAR
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
+        /// 
+        public DragonControls dragonControls;
+
+        bool spawned = false;
+
         public void Update()
         {
             _UpdateApplicationLifecycle();
@@ -109,7 +114,7 @@ namespace GoogleARCore.Examples.HelloAR
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                 TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
-            if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
+            if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit) && spawned == false)
             {
                 // Use hit pose and camera pose to check if hittest is from the
                 // back of the plane, if it is, no need to create the anchor.
@@ -132,6 +137,8 @@ namespace GoogleARCore.Examples.HelloAR
                         prefab = AndyPlanePrefab;
                     }
 
+                    spawned = true;
+
                     // Instantiate Andy model at the hit pose.
                     var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
 
@@ -141,6 +148,11 @@ namespace GoogleARCore.Examples.HelloAR
                     // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
                     // world evolves.
                     var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+
+                    dragonControls.Dragon = andyObject.transform;
+                    dragonControls.Dragon.transform.localEulerAngles = new Vector3(0, 180, 0);
+
+                    dragonControls.gameObject.SetActive(true);
 
                     // Make Andy model a child of the anchor.
                     andyObject.transform.parent = anchor.transform;
