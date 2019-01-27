@@ -23,6 +23,8 @@ namespace GoogleARCore.Examples.CloudAnchors
     using GoogleARCore;
     using UnityEngine;
 
+
+
     /// <summary>
     /// Controller for the Cloud Anchors Example. Handles the ARCore lifecycle.
     /// </summary>
@@ -91,6 +93,10 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// The current cloud anchor mode.
         /// </summary>
         private ApplicationMode m_CurrentMode = ApplicationMode.Ready;
+        
+
+
+        bool spawned = false;
 
         /// <summary>
         /// Enumerates modes the example application can be in.
@@ -101,6 +107,19 @@ namespace GoogleARCore.Examples.CloudAnchors
             Hosting,
             Resolving,
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// The Unity Start() method.
@@ -121,6 +140,7 @@ namespace GoogleARCore.Examples.CloudAnchors
         public void Update()
         {
             _UpdateApplicationLifecycle();
+
 
             // If we are neither in hosting nor resolving mode then the update is complete.
             if (m_CurrentMode != ApplicationMode.Hosting && m_CurrentMode != ApplicationMode.Resolving)
@@ -159,14 +179,15 @@ namespace GoogleARCore.Examples.CloudAnchors
                     m_LastPlacedAnchor = m_ARKit.CreateAnchor(hitPose);
                 }
             }
-
+            
             // If there was an anchor placed, then instantiate the corresponding object.
             if (m_LastPlacedAnchor != null)
             {
                 // The first touch on the Hosting mode will instantiate the origin anchor. Any subsequent touch will
                 // instantiate a star, both in Hosting and Resolving modes.
-                if (_CanPlaceStars())
+                if (_CanPlaceStars() && !spawned)
                 {
+                    spawned = true;
                     _InstantiateStar();
                 }
                 else if (!m_IsOriginPlaced && m_CurrentMode == ApplicationMode.Hosting)
@@ -289,6 +310,7 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// </summary>
         private void _InstantiateStar()
         {
+
             // Star must be spawned in the server so a networking Command is used.
             GameObject.Find("LocalPlayer").GetComponent<LocalPlayerController>()
                       .CmdSpawnStar(m_LastPlacedAnchor.transform.position, m_LastPlacedAnchor.transform.rotation);

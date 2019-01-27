@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class DragonControls : MonoBehaviour {
+public class DragonControls : NetworkBehaviour {
 
     // Use this for initialization
 
@@ -25,13 +26,11 @@ public class DragonControls : MonoBehaviour {
 
     void Update()
     {
+        //if (!isLocalPlayer) return;
         Vector3 moveVector = (transform.right * joystick.Horizontal + transform.forward * joystick.Vertical).normalized;
-        Dragon.transform.Translate(Vector3.forward * Mathf.Clamp( joystick.Vertical*6 , -1,1)* moveSpeed * Time.deltaTime);
+        Dragon.transform.Translate(Vector3.forward * Mathf.Clamp(joystick.Vertical * 6, -1, 1) * moveSpeed * Time.deltaTime);
         Dragon.transform.Rotate(Vector3.up * joystick.Horizontal * 66 * Time.deltaTime);
-
-
-
-        Dragon.transform.position = new Vector3(Dragon.transform.position.x, OriginalY+scrollbar.value, Dragon.transform.position.z);
+        Dragon.transform.position = new Vector3(Dragon.transform.position.x, OriginalY + scrollbar.value, Dragon.transform.position.z);
     }
 
     

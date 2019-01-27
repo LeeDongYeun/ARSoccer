@@ -77,6 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402737a5186cd48cd86798c77074db79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarPrefab: {fileID: 1975457108487340, guid: 597b77595728eaa409688e70d5881fbc, type: 3}
+  StarPrefab: {fileID: 1702762185864412, guid: bf4150fc9baf1e54cbf3f91623a287fa, type: 3}
   AnchorPrefab: {fileID: 1930613698465500, guid: d7e51cffc46904f65957fa3aeb255467,
     type: 3}

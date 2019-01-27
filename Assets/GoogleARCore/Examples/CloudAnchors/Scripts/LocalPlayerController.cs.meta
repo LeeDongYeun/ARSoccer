@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - StarPrefab: {fileID: 1975457108487340, guid: ec3e8f3ed27e2244caaedaf589590a03,
-      type: 3}
+  - StarPrefab: {instanceID: 0}
   - AnchorPrefab: {instanceID: 0}
+  - dragonControls: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

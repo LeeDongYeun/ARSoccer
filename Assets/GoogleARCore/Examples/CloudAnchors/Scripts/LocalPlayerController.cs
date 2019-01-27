@@ -22,6 +22,7 @@ namespace GoogleARCore.Examples.CloudAnchors
 {
     using UnityEngine;
     using UnityEngine.Networking;
+    using UnityEngine.UI;
 
     /// <summary>
     /// Local player controller. Handles the spawning of the networked Game Objects.
@@ -38,6 +39,17 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// </summary>
         public GameObject AnchorPrefab;
 
+        public DragonControls dragonControls;
+
+        public Transform Dragon;
+        public float moveSpeed;
+        public Joystick joystick;
+
+
+        public Scrollbar scrollbar;
+
+        float OriginalY = 0;
+
         /// <summary>
         /// The Unity OnStartLocalPlayer() method.
         /// </summary>
@@ -48,6 +60,11 @@ namespace GoogleARCore.Examples.CloudAnchors
             // A Name is provided to the Game Object so it can be found by other Scripts, since this is instantiated as
             // a prefab in the scene.
             gameObject.name = "LocalPlayer";
+            dragonControls = GameObject.Find("DragonControls").GetComponent<DragonControls>();
+            Dragon = GameObject.Find("Dragon").GetComponent<Transform>();
+            joystick = GameObject.Find("Fixed Joystick").GetComponent<Joystick>();
+
+
         }
 
         /// <summary>
@@ -78,9 +95,16 @@ namespace GoogleARCore.Examples.CloudAnchors
         {
             // Instantiate Star model at the hit pose.
             var starObject = Instantiate(StarPrefab, position, rotation);
+            dragonControls.Dragon = starObject.transform;
+            dragonControls.Dragon.transform.localEulerAngles = new Vector3(0, 180, 0);
 
+            dragonControls.gameObject.SetActive(true);
             // Spawn the object in all clients.
             NetworkServer.Spawn(starObject);
+            
         }
+
+
+        
     }
 }
