@@ -185,7 +185,6 @@ MonoBehaviour:
   destoryOnDeath: 0
   currentHealth: 100
   healthSlider: {fileID: 80}
-  healthbar: {fileID: 0}
 --- !u!1 &14
 GameObject:
   m_ObjectHideFlags: 0
