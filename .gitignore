@@ -69,3 +69,6 @@ GraphicsSettings.asset
 ProjectSettings.asset
  
 ProjectVersion.txt
+*.ide-shm
+*.ide-wal
+.vs/ARSoccer/v15/Server/sqlite3/storage.ide-wal
