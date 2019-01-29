@@ -93,6 +93,12 @@ public class MAXController : NetworkBehaviour
 
         NetworkServer.Spawn(bullet);
         Destroy(bullet, 4.0f);
+
+        //var bullet2 = (GameObject)Instantiate(bulletPrefab, bulletSpawn2.position, bulletSpawn2.rotation);
+        //bullet2.GetComponent<Rigidbody>().velocity = bullet2.transform.forward * 6;
+
+        //NetworkServer.Spawn(bullet2);
+        //Destroy(bullet2, 4.0f);
     }
 
     [Command]
